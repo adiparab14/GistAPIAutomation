@@ -76,7 +76,7 @@ public class Positive_Test {
     given().contentType("multipart/form-data").log().all().when()
         .config(config().multiPartConfig(multiPartConfig().defaultSubtype("mixed").defaultBoundary("--BOUNDARY")))
         .multiPart("type", "front", "text-plain").multiPart("auto_start", "false", "text/plain")
-        .multiPart("file", encodedFile, "image/jpeg").post("").then().assertThat().statusCode(202)
+        .multiPart("file", encodedFile, "image/jpeg").post(uriImage).then().assertThat().statusCode(202)
         // .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
         .extract().response().prettyPrint();
   }
