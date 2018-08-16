@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-node-browsers
+    steps:
+      - checkout
+      - run: sudo apt-get install maven
+      - run: mvn dependency:go-offline
+      - run: mvn integration-test
