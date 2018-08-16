@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "verification_url": {
+      "type": "string",
+      "description": "URL for the created verification"
+    },
+    "verification_images_url": {
+      "type": "string",
+      "description": "URL for verification's image collection"
+    }
+  }
+}
