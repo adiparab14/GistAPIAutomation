@@ -6,6 +6,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 import java.io.File;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -16,26 +17,30 @@ import io.restassured.response.Response;
 public class Positive_Test {
 
   final String baseURI = "https://private-538b1b-verificationsrv.apiary-mock.com/";
+  String webhookParam = "webhook_url";
+  String webhookValue = "www.abc.com";
+  String refNumberParam = "reference_number";
+  String refNumberValue = "abc123";
   String uriVerification, uriImage, uriId, id;
 
 
-  @BeforeTest
+  @BeforeSuite
   public void setUp() {
 
     RestAssured.baseURI = baseURI;
 
-    Response response = given().log().everything().contentType(ContentType.JSON).when().get("").then().assertThat()
+    Response response = given().contentType(ContentType.JSON).when().get("").then().assertThat()
         .statusCode(200).extract().response();
 
     uriVerification = response.path("verifications_url");
 
   }
 
-  @Test
+  @Test (groups ={"positive"})
   public void createVerifications() {
 
-    Response response = given().contentType(ContentType.JSON).log().everything().when()
-        .param("webhook_url", "www.abc.com").param("reference_number", "abc123").post(uriVerification).then()
+    Response response = given().contentType(ContentType.JSON).when()
+        .param(webhookParam, webhookValue).param(refNumberParam, refNumberValue).post(uriVerification).then()
         .assertThat().statusCode(201).body(matchesJsonSchemaInClasspath("Verifications.json")).extract().response();
 
     uriImage = response.path("verification_images_url");
@@ -44,41 +49,41 @@ public class Positive_Test {
   }
 
 
-  @Test
+  @Test(groups ={"negative"})
   public void createVerificationInvalidWebhook() {
 
-    given().contentType(ContentType.JSON).log().everything().when().param("webhook_url", "----")
-        .param("reference_number", "abc123").post(uriVerification).then().assertThat().statusCode(400)
+    given().contentType(ContentType.JSON).when().param(webhookParam, "----")
+        .param(refNumberParam, refNumberValue).post(uriVerification).then().assertThat().statusCode(400)
         .body(matchesJsonSchemaInClasspath("Error.json")).extract().response();
 
   }
 
-  @Test
+  @Test(groups ={"positive"})
   public void startVerificationCorrectID() {
 
-    Response response = given().contentType(ContentType.JSON).log().everything().when().put(uriId).then().assertThat()
+    Response response = given().contentType(ContentType.JSON).when().put(uriId).then().assertThat()
         .statusCode(200).body(matchesJsonSchemaInClasspath("Verification_Status.json")).extract().response();
 
     Assert.assertEquals(response.path("id"), id);
 
   }
 
-  @Test
+  @Test (groups ={"negative"})
   public void startVerificationIncorrectRessource() {
 
-    given().contentType(ContentType.JSON).log().everything().when().put(uriId).then().assertThat().statusCode(400)
+    given().contentType(ContentType.JSON).when().put(uriId).then().assertThat().statusCode(400)
         .body(matchesJsonSchemaInClasspath("Error.json")).extract().response();
 
   }
 
 
-  @Test
+  @Test(groups ={"positive"})
   public void uploadImageCorrectId() {
 
     String encodedFile =
         EncodeImage.encodeFileToBase64Binary(new File(getClass().getClassLoader().getResource("test.jpg").getFile()));
 
-    Response response = given().contentType("multipart/form-data").log().all().when()
+    Response response = given().contentType("multipart/form-data").when()
         .config(config().multiPartConfig(multiPartConfig().defaultSubtype("mixed").defaultBoundary("--BOUNDARY")))
         .multiPart("type", "front", "text-plain").multiPart("auto_start", "false", "text/plain")
         .multiPart("file", encodedFile, "image/jpeg").post(uriImage).then().assertThat().statusCode(202)
@@ -88,13 +93,13 @@ public class Positive_Test {
 
   }
 
-  @Test
+  @Test(groups ={"negative"})
   public void uploadImageInvalid() {
 
     String encodedFile =
         EncodeImage.encodeFileToBase64Binary(new File(getClass().getClassLoader().getResource("test.jpg").getFile()));
 
-    given().contentType("multipart/form-data").log().all().when()
+    given().contentType("multipart/form-data").when()
         .config(config().multiPartConfig(multiPartConfig().defaultSubtype("mixed").defaultBoundary("--BOUNDARY")))
         .multiPart("type", "front", "text-plain").multiPart("auto_start", "false", "text/plain")
         .multiPart("file", encodedFile, "image/jpeg").post(uriImage).then().assertThat().statusCode(400)
@@ -103,21 +108,21 @@ public class Positive_Test {
 
   }
 
-  @Test
+  @Test(groups ={"positive"})
   public void downloadReportCorrectId() {
 
 
-    given().contentType(ContentType.JSON).log().all().when().get(uriVerification + "/" + id + "/report").then()
+    given().contentType(ContentType.JSON).when().get(uriVerification + "/" + id + "/report").then()
         .assertThat().statusCode(200).extract().response();
 
 
   }
 
-  @Test
+  @Test(groups ={"negative"})
   public void downloadReportInCorrectId() {
 
 
-    given().contentType(ContentType.JSON).log().all().when().get(uriVerification + "/" + "ABCD" + "/report").then()
+    given().contentType(ContentType.JSON).when().get(uriVerification + "/" + "ABCD" + "/report").then()
         .assertThat().statusCode(400).body(matchesJsonSchemaInClasspath("Error.json")).extract().response();
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="23.508" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="14.563" tests="8" errors="0" skipped="0" failures="4">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_144\jre\bin"/>
@@ -45,7 +45,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_144\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -64,7 +64,40 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="createVerifications" classname="Positive_Test" time="4.069"/>
-  <testcase name="startVerificationCorrectID" classname="Positive_Test" time="1.529"/>
-  <testcase name="uploadImageCorrectId" classname="Positive_Test" time="1.094"/>
+  <testcase name="createVerificationInvalidWebhook" classname="Positive_Test" time="0.688">
+    <failure message="1 expectation failed.&#10;Expected status code &lt;400&gt; doesn&apos;t match actual status code &lt;201&gt;.&#10;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> doesn't match actual status code <201>.
+
+	at Positive_Test.createVerificationInvalidWebhook(Positive_Test.java:52)
+]]></failure>
+  </testcase>
+  <testcase name="createVerifications" classname="Positive_Test" time="1.235"/>
+  <testcase name="downloadReportCorrectId" classname="Positive_Test" time="5.25"/>
+  <testcase name="downloadReportInCorrectId" classname="Positive_Test" time="0.39">
+    <failure message="1 expectation failed.&#10;Expected status code &lt;400&gt; doesn&apos;t match actual status code &lt;200&gt;.&#10;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> doesn't match actual status code <200>.
+
+	at Positive_Test.downloadReportInCorrectId(Positive_Test.java:122)
+]]></failure>
+  </testcase>
+  <testcase name="startVerificationCorrectID" classname="Positive_Test" time="0.422"/>
+  <testcase name="startVerificationIncorrectRessource" classname="Positive_Test" time="0.359">
+    <failure message="1 expectation failed.&#10;Expected status code &lt;400&gt; doesn&apos;t match actual status code &lt;200&gt;.&#10;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> doesn't match actual status code <200>.
+
+	at Positive_Test.startVerificationIncorrectRessource(Positive_Test.java:70)
+]]></failure>
+  </testcase>
+  <testcase name="uploadImageCorrectId" classname="Positive_Test" time="0.904"/>
+  <testcase name="uploadImageInvalid" classname="Positive_Test" time="0.909">
+    <failure message="1 expectation failed.&#10;Expected status code &lt;400&gt; doesn&apos;t match actual status code &lt;202&gt;.&#10;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> doesn't match actual status code <202>.
+
+	at Positive_Test.uploadImageInvalid(Positive_Test.java:101)
+]]></failure>
+  </testcase>
 </testsuite>
