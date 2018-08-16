@@ -92,7 +92,7 @@ public class Positive_Test {
   public void uploadImageInvalid() {
 
     String encodedFile =
-        EncodeImage.encodeFileToBase64Binary(new File(getClass().getClassLoader().getResource("a.jpg").getFile()));
+        EncodeImage.encodeFileToBase64Binary(new File(getClass().getClassLoader().getResource("test.jpg").getFile()));
 
     given().contentType("multipart/form-data").log().all().when()
         .config(config().multiPartConfig(multiPartConfig().defaultSubtype("mixed").defaultBoundary("--BOUNDARY")))
