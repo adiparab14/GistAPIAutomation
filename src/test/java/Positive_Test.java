@@ -1,98 +1,82 @@
+import static io.restassured.RestAssured.config;
+import static io.restassured.RestAssured.given;
+import static io.restassured.config.MultiPartConfig.multiPartConfig;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
+import java.io.File;
+
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import java.io.File;
-import static io.restassured.RestAssured.given;
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class Positive_Test {
 
-    final String baseURI = "https://private-538b1b-verificationsrv.apiary-mock.com/";
-    String uriVerification;
-    String uriImage;
-    String uriId;
+  final String baseURI = "https://private-538b1b-verificationsrv.apiary-mock.com/";
+  String uriVerification;
+  String uriImage;
+  String uriId;
 
-    @BeforeTest
-    public void setUp() {
-        RestAssured.baseURI = baseURI;
 
-        Response response =
-                given()
-                        .contentType(ContentType.JSON)
-                        .when()
-                        .get()
-                        .then()
-                        .assertThat()
-                        .statusCode(200)
-                        .extract().response();
 
-        uriVerification = response.path("verifications_url");
-    }
+  @BeforeTest
+  public void setUp() {
 
-   /* @Test
-        public void verifyDiscoveryAPI() {
+    RestAssured.baseURI = baseURI;
 
-        Response response =
-                given()
-                .contentType(ContentType.JSON)
-                .when()
-                .get()
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .extract().response();
+    Response response = given().log().everything().contentType(ContentType.JSON).when().get("").then().assertThat()
+        .statusCode(200).extract().response();
 
-        Url = response.path("verifications_url");
+    uriVerification = response.path("verifications_url");
 
-    }
-*/
-   @Test
-    public void createVerifications() {
+  }
 
-       Response response =
-                given()
-                        .contentType(ContentType.JSON)
-                        .log().everything()
-                        .when()
-                        .param("webhook_url","www.abc.com")
-                        .param("reference_number","abc123")
-                        .post(uriVerification)
-                        .then()
-                        .assertThat()
-                        .statusCode(201)
-                        .body(matchesJsonSchemaInClasspath("Verifications.json"))
-                        .extract().response();
 
-       uriImage = response.path("verification_images_url");
-       uriId = response.path("verification_url");
-    }
+  /*
+   * @Test public void verifyDiscoveryAPI() {
+   * 
+   * Response response =
+   * given().contentType(ContentType.JSON).when().get().then().assertThat().statusCode(200).extract().response();
+   * 
+   * Url = response.path("verifications_url");
+   * 
+   * }
+   */
 
-    @Test
-    public void startVerificationCorrectID() {
+  @Test
+  public void createVerifications() {
 
-        // Response response =
-        given()
-                .contentType(ContentType.JSON)
-                .log().everything()
-                .when()
-                .put(uriId)
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
-                .extract().response().prettyPrint();
-    }
+    Response response = given().contentType(ContentType.JSON).log().everything().when()
+        .param("webhook_url", "www.abc.com").param("reference_number", "abc123").post(uriVerification).then()
+        .assertThat().statusCode(201).body(matchesJsonSchemaInClasspath("Verifications.json")).extract().response();
 
-    @Test
-    public void uploadImageCorrectId() {
+    uriImage = response.path("verification_images_url");
+    uriId = response.path("verification_url");
+  }
+
+  @Test
+  public void startVerificationCorrectID() {
+
+    Response response = given().contentType(ContentType.JSON).log().everything().when().put(uriId).then().assertThat()
+        .statusCode(200).body(matchesJsonSchemaInClasspath("Verification_Status.json")).extract().response();
+
+    // Assert.assertEquals(response.path("message"), "Image received");
+  }
+
+
+  @Test
+  public void uploadImageCorrectId() {
+
+    String encodedFile =
+        EncodeImage.encodeFileToBase64Binary(new File(getClass().getClassLoader().getResource("test.jpg").getFile()));
 
     // Response response =
-    given().contentType(ContentType.JSON).log().everything().when()
-
-        .multiPart("file", new File("test.jpg")).param("type", "front").post(uriImage).then().assertThat()
-        .statusCode(202)
+    given().contentType("multipart/form-data").log().all().when()
+        .config(config().multiPartConfig(multiPartConfig().defaultSubtype("mixed").defaultBoundary("--BOUNDARY")))
+        .multiPart("type", "front", "text-plain").multiPart("auto_start", "false", "text/plain")
+        .multiPart("file", encodedFile, "image/jpeg").post("").then().assertThat().statusCode(202)
         // .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
         .extract().response().prettyPrint();
   }
