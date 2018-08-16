@@ -2,7 +2,7 @@
 <suite name = "TestSuite">
     <test name = "Positive">
             <classes>
-                    <class name = "Positive_Test" />
+                    <class name = "TestCases" />
             </classes>
 
     </test>

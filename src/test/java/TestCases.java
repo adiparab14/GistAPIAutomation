@@ -14,7 +14,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-public class Positive_Test {
+public class TestCases {
 
   final String baseURI = "https://private-538b1b-verificationsrv.apiary-mock.com/";
   String webhookParam = "webhook_url";
