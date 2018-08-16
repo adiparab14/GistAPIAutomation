@@ -77,7 +77,7 @@ public class Positive_Test {
     Response response = given().contentType("multipart/form-data").log().all().when()
         .config(config().multiPartConfig(multiPartConfig().defaultSubtype("mixed").defaultBoundary("--BOUNDARY")))
         .multiPart("type", "front", "text-plain").multiPart("auto_start", "false", "text/plain")
-        .multiPart("file", encodedFile, "image/jpeg").post("").then().assertThat().statusCode(202)
+        .multiPart("file", encodedFile, "image/jpeg").post(uriId).then().assertThat().statusCode(202)
         // .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
         .extract().response();
 
@@ -89,7 +89,7 @@ public class Positive_Test {
   public void downloadReportCorrectId() {
 
 
-    given().contentType(ContentType.JSON).log().all().when().get(id + "/report").then().assertThat().statusCode(200)
+    given().contentType(ContentType.JSON).log().all().when().get(uriVerification + id + "/report").then().assertThat().statusCode(200)
         // .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
         .extract().response();
 
