@@ -19,7 +19,6 @@ public class Positive_Test {
   String uriVerification, uriImage, uriId, id;
 
 
-
   @BeforeTest
   public void setUp() {
 
@@ -31,18 +30,6 @@ public class Positive_Test {
     uriVerification = response.path("verifications_url");
 
   }
-
-
-  /*
-   * @Test public void verifyDiscoveryAPI() {
-   * 
-   * Response response =
-   * given().contentType(ContentType.JSON).when().get().then().assertThat().statusCode(200).extract().response();
-   * 
-   * Url = response.path("verifications_url");
-   * 
-   * }
-   */
 
   @Test
   public void createVerifications() {
@@ -56,15 +43,32 @@ public class Positive_Test {
     id = uriId.substring(uriId.lastIndexOf("/") + 1);
   }
 
+
+  @Test
+  public void createVerificationInvalidWebhook() {
+
+    given().contentType(ContentType.JSON).log().everything().when().param("webhook_url", "----")
+        .param("reference_number", "abc123").post(uriVerification).then().assertThat().statusCode(400)
+        .body(matchesJsonSchemaInClasspath("Error.json")).extract().response();
+
+  }
+
   @Test
   public void startVerificationCorrectID() {
 
     Response response = given().contentType(ContentType.JSON).log().everything().when().put(uriId).then().assertThat()
         .statusCode(200).body(matchesJsonSchemaInClasspath("Verification_Status.json")).extract().response();
 
-    Assert.assertEquals(response.path("id"), "7b473e7c034d40dbae19d275c871aedb");
+    Assert.assertEquals(response.path("id"), id);
 
-    // Assert.assertEquals(response.path("message"), "Image received");
+  }
+
+  @Test
+  public void startVerificationIncorrectRessource() {
+
+    given().contentType(ContentType.JSON).log().everything().when().put(uriId).then().assertThat().statusCode(400)
+        .body(matchesJsonSchemaInClasspath("Error.json")).extract().response();
+
   }
 
 
@@ -78,10 +82,24 @@ public class Positive_Test {
         .config(config().multiPartConfig(multiPartConfig().defaultSubtype("mixed").defaultBoundary("--BOUNDARY")))
         .multiPart("type", "front", "text-plain").multiPart("auto_start", "false", "text/plain")
         .multiPart("file", encodedFile, "image/jpeg").post(uriImage).then().assertThat().statusCode(202)
-        // .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
-        .extract().response();
+        .body(matchesJsonSchemaInClasspath("Verification_AddImage.json")).extract().response();
 
     Assert.assertEquals(response.path("message"), "Image received");
+
+  }
+
+  @Test
+  public void uploadImageInvalid() {
+
+    String encodedFile =
+        EncodeImage.encodeFileToBase64Binary(new File(getClass().getClassLoader().getResource("a.jpg").getFile()));
+
+    given().contentType("multipart/form-data").log().all().when()
+        .config(config().multiPartConfig(multiPartConfig().defaultSubtype("mixed").defaultBoundary("--BOUNDARY")))
+        .multiPart("type", "front", "text-plain").multiPart("auto_start", "false", "text/plain")
+        .multiPart("file", encodedFile, "image/jpeg").post(uriImage).then().assertThat().statusCode(400)
+        .body(matchesJsonSchemaInClasspath("Error.json")).extract().response();
+
 
   }
 
@@ -89,12 +107,19 @@ public class Positive_Test {
   public void downloadReportCorrectId() {
 
 
-    given().contentType(ContentType.JSON).log().all().when().get(uriVerification + "/" + id + "/report").then().assertThat().statusCode(200)
-        // .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
-        .extract().response();
+    given().contentType(ContentType.JSON).log().all().when().get(uriVerification + "/" + id + "/report").then()
+        .assertThat().statusCode(200).extract().response();
+
+
+  }
+
+  @Test
+  public void downloadReportInCorrectId() {
+
+
+    given().contentType(ContentType.JSON).log().all().when().get(uriVerification + "/" + "ABCD" + "/report").then()
+        .assertThat().statusCode(400).body(matchesJsonSchemaInClasspath("Error.json")).extract().response();
 
 
   }
 }
-
-
