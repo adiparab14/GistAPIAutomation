@@ -5,6 +5,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 import java.io.File;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -15,9 +16,7 @@ import io.restassured.response.Response;
 public class Positive_Test {
 
   final String baseURI = "https://private-538b1b-verificationsrv.apiary-mock.com/";
-  String uriVerification;
-  String uriImage;
-  String uriId;
+  String uriVerification, uriImage, uriId, id;
 
 
 
@@ -54,6 +53,7 @@ public class Positive_Test {
 
     uriImage = response.path("verification_images_url");
     uriId = response.path("verification_url");
+    id = uriId.substring(uriId.lastIndexOf("/") + 1);
   }
 
   @Test
@@ -61,6 +61,8 @@ public class Positive_Test {
 
     Response response = given().contentType(ContentType.JSON).log().everything().when().put(uriId).then().assertThat()
         .statusCode(200).body(matchesJsonSchemaInClasspath("Verification_Status.json")).extract().response();
+
+    Assert.assertEquals(response.path("id"), "7b473e7c034d40dbae19d275c871aedb");
 
     // Assert.assertEquals(response.path("message"), "Image received");
   }
@@ -72,13 +74,26 @@ public class Positive_Test {
     String encodedFile =
         EncodeImage.encodeFileToBase64Binary(new File(getClass().getClassLoader().getResource("test.jpg").getFile()));
 
-    // Response response =
-    given().contentType("multipart/form-data").log().all().when()
+    Response response = given().contentType("multipart/form-data").log().all().when()
         .config(config().multiPartConfig(multiPartConfig().defaultSubtype("mixed").defaultBoundary("--BOUNDARY")))
         .multiPart("type", "front", "text-plain").multiPart("auto_start", "false", "text/plain")
-        .multiPart("file", encodedFile, "image/jpeg").post(uriImage).then().assertThat().statusCode(202)
+        .multiPart("file", encodedFile, "image/jpeg").post("").then().assertThat().statusCode(202)
         // .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
-        .extract().response().prettyPrint();
+        .extract().response();
+
+    Assert.assertEquals(response.path("message"), "Image received");
+
+  }
+
+  @Test
+  public void downloadReportCorrectId() {
+
+
+    given().contentType(ContentType.JSON).log().all().when().get(id + "/report").then().assertThat().statusCode(200)
+        // .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
+        .extract().response();
+
+
   }
 }
 
