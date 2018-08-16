@@ -87,20 +87,14 @@ public class Positive_Test {
     @Test
     public void uploadImageCorrectId() {
 
-        // Response response =
-        given()
-                .contentType(ContentType.JSON)
-                .log().everything()
-                .when()
-                .param("file","test.jpg")
-                .param("type","front")
-                .post(uriImage)
-                .then()
-                .assertThat()
-                .statusCode(202)
-                //.body(matchesJsonSchemaInClasspath("Verification_Status.json"))
-                .extract().response().prettyPrint();
-    }
+    // Response response =
+    given().contentType(ContentType.JSON).log().everything().when()
+
+        .multiPart("file", new File("test.jpg")).param("type", "front").post(uriImage).then().assertThat()
+        .statusCode(202)
+        // .body(matchesJsonSchemaInClasspath("Verification_Status.json"))
+        .extract().response().prettyPrint();
+  }
 }
 
 
