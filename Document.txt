@@ -1,0 +1,18 @@
+Verifications API
+This project is developed for automated testing of the Verifications API. The endpoint used was https://private-538b1b-verificationsrv.apiary-mock.com/ 
+Test Cases
+Positive
+- Create Verification
+- Start Verification
+- Upload Image
+- Download report
+
+Negative
+- Create verification with invalid webhoon url
+- Start verification with invalid id
+- Upload invalid Image
+- Download report with invalid id
+All the negative test cases are failing because the Mock API always returns a positive response for incorrect requests as well.
+
+Framework
+1. I have automated the testing using REST Assured for the API's. 

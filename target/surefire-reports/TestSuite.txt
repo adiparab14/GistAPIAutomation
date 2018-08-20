@@ -1,32 +1,32 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 14.563 s <<< FAILURE! - in TestSuite
-createVerificationInvalidWebhook(Positive_Test)  Time elapsed: 0.688 s  <<< FAILURE!
+Tests run: 8, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 16.84 s <<< FAILURE! - in TestSuite
+createVerificationInvalidWebhook(restassured.TestCases)  Time elapsed: 1.046 s  <<< FAILURE!
 java.lang.AssertionError: 
 1 expectation failed.
 Expected status code <400> doesn't match actual status code <201>.
 
-	at Positive_Test.createVerificationInvalidWebhook(Positive_Test.java:52)
+	at restassured.TestCases.createVerificationInvalidWebhook(TestCases.java:57)
 
-downloadReportInCorrectId(Positive_Test)  Time elapsed: 0.39 s  <<< FAILURE!
+downloadReportInCorrectId(restassured.TestCases)  Time elapsed: 0.319 s  <<< FAILURE!
 java.lang.AssertionError: 
 1 expectation failed.
 Expected status code <400> doesn't match actual status code <200>.
 
-	at Positive_Test.downloadReportInCorrectId(Positive_Test.java:122)
+	at restassured.TestCases.downloadReportInCorrectId(TestCases.java:127)
 
-startVerificationIncorrectRessource(Positive_Test)  Time elapsed: 0.359 s  <<< FAILURE!
+startVerificationIncorrectRessource(restassured.TestCases)  Time elapsed: 0.341 s  <<< FAILURE!
 java.lang.AssertionError: 
 1 expectation failed.
 Expected status code <400> doesn't match actual status code <200>.
 
-	at Positive_Test.startVerificationIncorrectRessource(Positive_Test.java:70)
+	at restassured.TestCases.startVerificationIncorrectRessource(TestCases.java:75)
 
-uploadImageInvalid(Positive_Test)  Time elapsed: 0.909 s  <<< FAILURE!
+uploadImageInvalid(restassured.TestCases)  Time elapsed: 0.815 s  <<< FAILURE!
 java.lang.AssertionError: 
 1 expectation failed.
 Expected status code <400> doesn't match actual status code <202>.
 
-	at Positive_Test.uploadImageInvalid(Positive_Test.java:101)
+	at restassured.TestCases.uploadImageInvalid(TestCases.java:106)
 

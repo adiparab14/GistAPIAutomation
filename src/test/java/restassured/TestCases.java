@@ -8,7 +8,6 @@ import java.io.File;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
@@ -62,7 +61,7 @@ public class TestCases {
   @Test(groups ={"positive"})
   public void startVerificationCorrectID() {
 
-    Response response = given().contentType(ContentType.JSON).when().put(uriId).then().assertThat()
+    Response response = given().contentType(ContentType.JSON).when().put("verifications/7878787").then().assertThat()
         .statusCode(200).body(matchesJsonSchemaInClasspath("Verification_Status.json")).extract().response();
 
     Assert.assertEquals(response.path("id"), id);

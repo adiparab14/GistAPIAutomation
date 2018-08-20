@@ -2,28 +2,28 @@
 <testng-results skipped="0" failed="4" ignored="0" total="8" passed="4">
   <reporter-output>
   </reporter-output>
-  <suite name="TestSuite" duration-ms="10172" started-at="2018-08-16T17:55:39Z" finished-at="2018-08-16T17:55:50Z">
+  <suite name="TestSuite" duration-ms="5809" started-at="2018-08-20T05:40:39Z" finished-at="2018-08-20T05:40:45Z">
     <groups>
       <group name="negative">
-        <method signature="Positive_Test.createVerificationInvalidWebhook()[pri:0, instance:Positive_Test@edf4efb]" name="createVerificationInvalidWebhook" class="Positive_Test"/>
-        <method signature="Positive_Test.downloadReportInCorrectId()[pri:0, instance:Positive_Test@edf4efb]" name="downloadReportInCorrectId" class="Positive_Test"/>
-        <method signature="Positive_Test.startVerificationIncorrectRessource()[pri:0, instance:Positive_Test@edf4efb]" name="startVerificationIncorrectRessource" class="Positive_Test"/>
-        <method signature="Positive_Test.uploadImageInvalid()[pri:0, instance:Positive_Test@edf4efb]" name="uploadImageInvalid" class="Positive_Test"/>
+        <method signature="TestCases.createVerificationInvalidWebhook()[pri:0, instance:restassured.TestCases@edf4efb]" name="createVerificationInvalidWebhook" class="restassured.TestCases"/>
+        <method signature="TestCases.downloadReportInCorrectId()[pri:0, instance:restassured.TestCases@edf4efb]" name="downloadReportInCorrectId" class="restassured.TestCases"/>
+        <method signature="TestCases.startVerificationIncorrectRessource()[pri:0, instance:restassured.TestCases@edf4efb]" name="startVerificationIncorrectRessource" class="restassured.TestCases"/>
+        <method signature="TestCases.uploadImageInvalid()[pri:0, instance:restassured.TestCases@edf4efb]" name="uploadImageInvalid" class="restassured.TestCases"/>
       </group> <!-- negative -->
       <group name="positive">
-        <method signature="Positive_Test.createVerifications()[pri:0, instance:Positive_Test@edf4efb]" name="createVerifications" class="Positive_Test"/>
-        <method signature="Positive_Test.downloadReportCorrectId()[pri:0, instance:Positive_Test@edf4efb]" name="downloadReportCorrectId" class="Positive_Test"/>
-        <method signature="Positive_Test.startVerificationCorrectID()[pri:0, instance:Positive_Test@edf4efb]" name="startVerificationCorrectID" class="Positive_Test"/>
-        <method signature="Positive_Test.uploadImageCorrectId()[pri:0, instance:Positive_Test@edf4efb]" name="uploadImageCorrectId" class="Positive_Test"/>
+        <method signature="TestCases.createVerifications()[pri:0, instance:restassured.TestCases@edf4efb]" name="createVerifications" class="restassured.TestCases"/>
+        <method signature="TestCases.downloadReportCorrectId()[pri:0, instance:restassured.TestCases@edf4efb]" name="downloadReportCorrectId" class="restassured.TestCases"/>
+        <method signature="TestCases.startVerificationCorrectID()[pri:0, instance:restassured.TestCases@edf4efb]" name="startVerificationCorrectID" class="restassured.TestCases"/>
+        <method signature="TestCases.uploadImageCorrectId()[pri:0, instance:restassured.TestCases@edf4efb]" name="uploadImageCorrectId" class="restassured.TestCases"/>
       </group> <!-- positive -->
     </groups>
-    <test name="Positive" duration-ms="10172" started-at="2018-08-16T17:55:39Z" finished-at="2018-08-16T17:55:50Z">
-      <class name="Positive_Test">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:Positive_Test@edf4efb]" name="setUp" is-config="true" duration-ms="3578" started-at="2018-08-16T19:55:36Z" finished-at="2018-08-16T19:55:39Z">
+    <test name="Positive" duration-ms="5809" started-at="2018-08-20T05:40:39Z" finished-at="2018-08-20T05:40:45Z">
+      <class name="restassured.TestCases">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:restassured.TestCases@edf4efb]" name="setUp" is-config="true" duration-ms="9804" started-at="2018-08-20T07:40:30Z" finished-at="2018-08-20T07:40:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="createVerificationInvalidWebhook()[pri:0, instance:Positive_Test@edf4efb]" name="createVerificationInvalidWebhook" duration-ms="672" started-at="2018-08-16T19:55:39Z" finished-at="2018-08-16T19:55:40Z">
+        <test-method status="FAIL" signature="createVerificationInvalidWebhook()[pri:0, instance:restassured.TestCases@edf4efb]" name="createVerificationInvalidWebhook" duration-ms="1024" started-at="2018-08-20T07:40:39Z" finished-at="2018-08-20T07:40:40Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[1 expectation failed.
@@ -58,7 +58,7 @@ Expected status code <400> doesn't match actual status code <201>.
 	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
 	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:128)
 	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:117)
-	at Positive_Test.createVerificationInvalidWebhook(Positive_Test.java:52)
+	at restassured.TestCases.createVerificationInvalidWebhook(TestCases.java:57)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -93,15 +93,15 @@ Expected status code <400> doesn't match actual status code <201>.
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createVerificationInvalidWebhook -->
-        <test-method status="PASS" signature="createVerifications()[pri:0, instance:Positive_Test@edf4efb]" name="createVerifications" duration-ms="1235" started-at="2018-08-16T19:55:40Z" finished-at="2018-08-16T19:55:41Z">
+        <test-method status="PASS" signature="createVerifications()[pri:0, instance:restassured.TestCases@edf4efb]" name="createVerifications" duration-ms="1681" started-at="2018-08-20T07:40:40Z" finished-at="2018-08-20T07:40:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createVerifications -->
-        <test-method status="PASS" signature="downloadReportCorrectId()[pri:0, instance:Positive_Test@edf4efb]" name="downloadReportCorrectId" duration-ms="5250" started-at="2018-08-16T19:55:41Z" finished-at="2018-08-16T19:55:47Z">
+        <test-method status="PASS" signature="downloadReportCorrectId()[pri:0, instance:restassured.TestCases@edf4efb]" name="downloadReportCorrectId" duration-ms="287" started-at="2018-08-20T07:40:42Z" finished-at="2018-08-20T07:40:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- downloadReportCorrectId -->
-        <test-method status="FAIL" signature="downloadReportInCorrectId()[pri:0, instance:Positive_Test@edf4efb]" name="downloadReportInCorrectId" duration-ms="390" started-at="2018-08-16T19:55:47Z" finished-at="2018-08-16T19:55:47Z">
+        <test-method status="FAIL" signature="downloadReportInCorrectId()[pri:0, instance:restassured.TestCases@edf4efb]" name="downloadReportInCorrectId" duration-ms="318" started-at="2018-08-20T07:40:42Z" finished-at="2018-08-20T07:40:43Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[1 expectation failed.
@@ -134,7 +134,7 @@ Expected status code <400> doesn't match actual status code <200>.
 	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
 	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:128)
 	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:117)
-	at Positive_Test.downloadReportInCorrectId(Positive_Test.java:122)
+	at restassured.TestCases.downloadReportInCorrectId(TestCases.java:127)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -169,11 +169,11 @@ Expected status code <400> doesn't match actual status code <200>.
           <reporter-output>
           </reporter-output>
         </test-method> <!-- downloadReportInCorrectId -->
-        <test-method status="PASS" signature="startVerificationCorrectID()[pri:0, instance:Positive_Test@edf4efb]" name="startVerificationCorrectID" duration-ms="422" started-at="2018-08-16T19:55:47Z" finished-at="2018-08-16T19:55:47Z">
+        <test-method status="PASS" signature="startVerificationCorrectID()[pri:0, instance:restassured.TestCases@edf4efb]" name="startVerificationCorrectID" duration-ms="357" started-at="2018-08-20T07:40:43Z" finished-at="2018-08-20T07:40:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startVerificationCorrectID -->
-        <test-method status="FAIL" signature="startVerificationIncorrectRessource()[pri:0, instance:Positive_Test@edf4efb]" name="startVerificationIncorrectRessource" duration-ms="359" started-at="2018-08-16T19:55:47Z" finished-at="2018-08-16T19:55:48Z">
+        <test-method status="FAIL" signature="startVerificationIncorrectRessource()[pri:0, instance:restassured.TestCases@edf4efb]" name="startVerificationIncorrectRessource" duration-ms="341" started-at="2018-08-20T07:40:43Z" finished-at="2018-08-20T07:40:43Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[1 expectation failed.
@@ -206,7 +206,7 @@ Expected status code <400> doesn't match actual status code <200>.
 	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
 	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:128)
 	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:117)
-	at Positive_Test.startVerificationIncorrectRessource(Positive_Test.java:70)
+	at restassured.TestCases.startVerificationIncorrectRessource(TestCases.java:75)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -241,11 +241,11 @@ Expected status code <400> doesn't match actual status code <200>.
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startVerificationIncorrectRessource -->
-        <test-method status="PASS" signature="uploadImageCorrectId()[pri:0, instance:Positive_Test@edf4efb]" name="uploadImageCorrectId" duration-ms="904" started-at="2018-08-16T19:55:48Z" finished-at="2018-08-16T19:55:49Z">
+        <test-method status="PASS" signature="uploadImageCorrectId()[pri:0, instance:restassured.TestCases@edf4efb]" name="uploadImageCorrectId" duration-ms="929" started-at="2018-08-20T07:40:43Z" finished-at="2018-08-20T07:40:44Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- uploadImageCorrectId -->
-        <test-method status="FAIL" signature="uploadImageInvalid()[pri:0, instance:Positive_Test@edf4efb]" name="uploadImageInvalid" duration-ms="909" started-at="2018-08-16T19:55:49Z" finished-at="2018-08-16T19:55:50Z">
+        <test-method status="FAIL" signature="uploadImageInvalid()[pri:0, instance:restassured.TestCases@edf4efb]" name="uploadImageInvalid" duration-ms="814" started-at="2018-08-20T07:40:44Z" finished-at="2018-08-20T07:40:45Z">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[1 expectation failed.
@@ -278,7 +278,7 @@ Expected status code <400> doesn't match actual status code <202>.
 	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
 	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:128)
 	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:117)
-	at Positive_Test.uploadImageInvalid(Positive_Test.java:101)
+	at restassured.TestCases.uploadImageInvalid(TestCases.java:106)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -313,7 +313,7 @@ Expected status code <400> doesn't match actual status code <202>.
           <reporter-output>
           </reporter-output>
         </test-method> <!-- uploadImageInvalid -->
-      </class> <!-- Positive_Test -->
+      </class> <!-- restassured.TestCases -->
     </test> <!-- Positive -->
   </suite> <!-- TestSuite -->
 </testng-results>

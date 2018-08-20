@@ -3,15 +3,15 @@
 <suite guice-stage="DEVELOPMENT" verbose="0" name="Failed suite [TestSuite]">
   <test name="Positive(failed)">
     <classes>
-      <class name="Positive_Test">
+      <class name="restassured.TestCases">
         <methods>
+          <include name="createVerificationInvalidWebhook"/>
           <include name="downloadReportInCorrectId"/>
           <include name="startVerificationIncorrectRessource"/>
-          <include name="createVerificationInvalidWebhook"/>
           <include name="uploadImageInvalid"/>
           <include name="setUp"/>
         </methods>
-      </class> <!-- Positive_Test -->
+      </class> <!-- restassured.TestCases -->
     </classes>
   </test> <!-- Positive(failed) -->
 </suite> <!-- Failed suite [TestSuite] -->
