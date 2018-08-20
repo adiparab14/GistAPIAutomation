@@ -7,4 +7,4 @@ jobs:
       - checkout
       - run: sudo apt-get install maven
       - run: mvn dependency:go-offline
-      - run: mvn integration-test
+      - run: mvn test
