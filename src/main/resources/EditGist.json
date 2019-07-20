@@ -1,13 +1,16 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "properties": {
-    "error": {
-      "type": "string"
+  "description": "Hello World Examples",
+  "public": true,
+  "files": {
+    "hello_world.rb": null,
+    "hello_world.py": {
+      "content": "class HelloWorld:\n\n    def __init__(self, name):\n        self.name = name.capitalize()\n       \n    def sayHi(self):\n        print \"Hello \" + self.name + \"!\"\n\nhello = HelloWorld(\"world\")\nhello.sayHi()"
     },
-    "error_description": {
-      "type": "string",
-      "description": "Error description"
+    "hello_world_ruby.txt": {
+      "content": "Run `ruby hello_world.rb` to print Hello World"
+    },
+    "hello_world_python.txt": {
+      "content": "Run `python hello_world.py` to print Hello World"
     }
   }
 }
