@@ -27,13 +27,13 @@ public class TestCases {
 	}
 
 	@Test
-	public void noAuthenctication_readGistsAll() {
+	public void noAuthentication_readGistsAll() {
 
 		given().when().get("/gists").then().assertThat().statusCode(200);
 	}
 
 	@Test
-	public void noAuthenctication_readGistsSpecific() {
+	public void noAuthentication_readGistsSpecific() {
 
 		Response response = given().when().get("/gists/437b031138d0d816eb00c39480e38224").then().assertThat()
 				.statusCode(200).extract().response();
@@ -42,34 +42,34 @@ public class TestCases {
 	}
 
 	@Test
-	public void noAuthenctication_createGist() {
+	public void noAuthentication_createGist() {
 
 		given().when().body(createGist).post("/gists").then().assertThat().statusCode(401).extract().response();
 	}
 
 	@Test
-	public void noAuthenctication_editGist() {
+	public void noAuthentication_editGist() {
 
 		given().when().body(editGist).patch("/gists/" + gistId).then().assertThat().statusCode(404).extract()
 				.response();
 	}
 
 	@Test
-	public void noAuthenctication_deleteGist() {
+	public void noAuthentication_deleteGist() {
 
 		given().when().body(createGist).delete("/gists/" + gistId).then().assertThat().statusCode(404).extract()
 				.response();
 	}
 
 	@Test
-	public void noAuthenctication_rateLimit() {
+	public void noAuthentication_rateLimit() {
 
 		Response response = given().when().get("/rate_limit").then().assertThat().statusCode(200).extract().response();
 		Assert.assertEquals(response.path("rate.limit").toString(), "60");
 	}
 
 	@Test
-	public void withAuthenctication_rateLimit() {
+	public void withAuthentication_rateLimit() {
 
 		Response response = given().auth().oauth2(token).when().get("/rate_limit").then().assertThat().statusCode(200)
 				.extract().response();
@@ -77,13 +77,13 @@ public class TestCases {
 	}
 
 	@Test
-	public void withAuthenctication_readGistsAll() {
+	public void withAuthentication_readGistsAll() {
 
 		given().auth().oauth2(token).when().get("/gists").then().assertThat().statusCode(200);
 	}
 
 	@Test
-	public void withAuthenctication_readGistsSpecific() {
+	public void withAuthentication_readGistsSpecific() {
 
 		Response response = given().auth().oauth2(token).when().get("/gists/437b031138d0d816eb00c39480e38224").then()
 				.assertThat().statusCode(200).extract().response();
@@ -92,7 +92,7 @@ public class TestCases {
 	}
 
 	@Test(priority = 0)
-	public void withAuthenctication_createGist() {
+	public void withAuthentication_createGist() {
 
 		Response response = given().auth().oauth2(token).when().body(createGist).post("/gists").then().assertThat()
 				.statusCode(201).extract().response();
@@ -101,7 +101,7 @@ public class TestCases {
 	}
 
 	@Test(priority = 1)
-	public void withAuthenctication_editGist() {
+	public void withAuthentication_editGist() {
 
 		Response response = given().auth().oauth2(token).when().body(editGist).patch("/gists/" + gistId).then()
 				.assertThat().statusCode(200).extract().response();
@@ -109,7 +109,7 @@ public class TestCases {
 	}
 
 	@Test(priority = 2)
-	public void withAuthenctication_deleteGist() {
+	public void withAuthentication_deleteGist() {
 
 		Response response = given().auth().oauth2(token).when().delete("/gists/" + gistId).then().assertThat()
 				.statusCode(204).extract().response();
