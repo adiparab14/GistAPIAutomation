@@ -14,7 +14,7 @@ import io.restassured.response.Response;
 public class TestCases {
 
 	final String baseURI = "https://api.github.com/";
-	final String token = "948494709711a0bed964a029e4dc8f71baff1ebb";
+	final String token = "59cc50961ecae37f75d5ed1f69147c8304619b53 ";
 	String gistId;
 	File createGist = new File("src/main/resources/CreateGist.json");
 	File editGist = new File("src/main/resources/EditGist.json");

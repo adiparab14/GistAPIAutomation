@@ -3,22 +3,25 @@ This project is developed for automated testing of the Gists Github API. The end
 
 ## Test Cases
 
-### Positive
-- Create Verification
-- Start Verification
-- Upload Image
-- Download report
-### Negative
+In case of no authentication test cases, existing gist id is used. In case of with Authentication, a new gist is created every time which is Read, Updated and Deleted.
 
-- Create verification with invalid webhoon url
-- Start verification with invalid id
-- Upload invalid Image
-- Download report with invalid id
+In case of test cases for rate limit, verification is done for the maximum no of requests available per day for authenticated and un-authenticated access.
+
+- noAuthentication_createGist - Creating gist without Authentication. Expected 401.
+- noAuthentication_editGist - Editing gist without Authentication. Expected 401
+- noAuthentication_deleteGist - Deleting gist without Authentication. Expected 401.
+- noAuthenctication_rateLimit - Requesting rate limit for requests without Authentication. Expected the rate limit for un authenticated requests of different type.
+- noAuthenctication_readGistsAll - Retrieving All Gists. Expected list of all public gists.
+- noAuthentication_readGistsSpecific - Retrieving the details of the specific gist with gistid.
+- withAuthentication_createGist - Creating gist with Authentication.  New gist is created.
+- withAuthentication_editGist - Editing gist with Authentication. The specified gist is edited.
+- withAuthentication_deleteGist - Deleting gist with Authentication. The specified gist is deleted.
+- withAuthentication_rateLimit - Requesting rate limit for requests with Authentication. Expected the rate limit for authenticated requests of different type.
+- withAuthentication_readGistsAll - Retrieving All Gists. Expected list of all gists of the authencitcated user.
+- withAuthentication_readGistsSpecific - Retrieving the details of the specific gist with gistid.
 
 
---The URI's are referred from the discovery api and the subsequent responses. This makes the test cases independent of the changes in URI's
-
---Assertions is made on the HTTP response code and the JSON schema. Some assertions are also made on the response message content.
+--Assertions is made on the HTTP response code and in some cases on the gist id.
 
 --All the negative test cases are failing because the Mock API always returns a positive response for incorrect requests as well.
 
@@ -34,7 +37,6 @@ Testing frameworks makes writing test cases easy. It aslo provides features like
 **Maven is used for dependency management and build**
 We are using multiple libraries and Maven makes it extremely easy to make available all required libraries automatedly. Also less configuration is required to build tests on a new machine.
 
-JSON schema is validated for all cases using json-schema-validator (https://github.com/fge/json-schema-formats)
 
 ## Pre-requisites
 
@@ -53,23 +55,3 @@ Run the following command in the root folder
 ```
 mvn test
 ``` 
-
-## Circle CI
-The above Project can also be built using Circle CI. The valid config file is available in .circleci
-
-__Step 1: Fork this reposirtory__
-
-__Step 2: Login to [CircleCI](www.circleci.com) with your Github credentials__
-
-__Step 3: Click the Add Project button in the left navigation pane__
-
-__Step 4: Find your repository and click the Setup Button on the far right-hand side of the screen__
-
-__Step5: Scroll past the setup information and click the Start Building button.__
-
-## Additional things which could have been possible
--- All negative test cases could be automated. But as there is not proper response for negative tests, this could not be done.
-
--- Verification of Webhook
-  I tried with a  temporary webhook. But I noticed that there is nothing being posted on it (Probably because it is mock).
-  If there was more time I would like to investigate how this can be automated to test subsequent requests.
