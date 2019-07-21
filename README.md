@@ -21,21 +21,20 @@ In case of test cases for rate limit, verification is done for the maximum no of
 - withAuthentication_readGistsSpecific - Retrieving the details of the specific gist with gistid.
 
 
---Assertions is made on the HTTP response code and in some cases on the gist id.
+--Assertion is made on the HTTP response code and in some cases on the gist id.
 
---All the negative test cases are failing because the Mock API always returns a positive response for incorrect requests as well.
 
 ## Framework
-All the test cases are available in the TestCases.java class. EncodeImage.java class encodes the .jpg image to Base64 as is required in the Upload Image request.
+All the test cases are available in the TestCases.java class. 
 
 **REST Assured for API Testing**
 Rest assured makes testing of http requests easier. It also provides the given, when and then format to write tests which are easier to understand.
 
 **TestNG is used as the testing framework**
-Testing frameworks makes writing test cases easy. It aslo provides features like setup and grouping fo tests.
+Testing frameworks makes writing test cases easy. It also provides features like setup and grouping fo tests.
 
 **Maven is used for dependency management and build**
-We are using multiple libraries and Maven makes it extremely easy to make available all required libraries automatedly. Also less configuration is required to build tests on a new machine.
+We are using multiple libraries and Maven makes it extremely easy to make available all required libraries. Also less configuration is required to build tests on a new machine.
 
 
 ## Pre-requisites
